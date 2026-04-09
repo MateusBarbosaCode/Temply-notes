@@ -2,51 +2,43 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Bloco de Notas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Temply</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <link rel="manifest" href="manifest.json">
 
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Lux Notes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Temply">
+    <link rel="apple-touch-icon" href="img/192.png">
 
-<link rel="manifest" href="manifest.json">
-
-<link rel="apple-touch-icon" href="img/192.png">
-
-<meta name="theme-color" content="#0d1117">
-
+    <meta name="theme-color" content="#0d1117">
 </head>
 <body>
 
 <div class="container">
 
     <div class="header-main">
-        <h1>Meu Bloco de Notas</h1>
+        <h1>Temply</h1>
         <button id="toggleMode">
             <img src="img/moon.png" id="themeIcon">
         </button>
     </div>
 
-    <p>Suas anotações com agendamento e alarme.</p>
+    <p>Anotações minimalistas com foco em estrutura.</p>
 
     <div class="content-wrapper">
-
         <div class="left-column">
-
             <textarea id="blocoDeNotas" placeholder="Comece a digitar aqui..."></textarea>
-
-           
+            
             <div class="agendamento-container">
                 <label>Agendar Alarme:</label>
                 <input type="datetime-local" id="dataHora">
             </div>
 
-           
             <div class="agendamento-container">
                 <label>Categoria:</label>
                 <select id="categoria">
@@ -60,36 +52,28 @@
                 <button id="salvarNota">Salvar Nota</button>
                 <button id="limparTudo">Limpar Tudo</button>
             </div>
-
         </div>
 
         <div class="right-column">
-
             <h3>Notas Salvas</h3>
-
-            
-           <div class="folder-filters">
-    <button class="folder-btn active" onclick="trocarCategoria('Particular')">
-        <span>📁</span> Particular
-    </button>
-    <button class="folder-btn" onclick="trocarCategoria('Projetos')">
-        <span>📂</span> Projetos
-    </button>
-    <button class="folder-btn" onclick="trocarCategoria('Hábitos')">
-        <span>✅</span> Hábitos
-    </button>
-</div>
-
+            <div class="folder-filters">
+                <button class="folder-btn active" onclick="trocarCategoria('Particular')">
+                    <span>📁</span> Particular
+                </button>
+                <button class="folder-btn" onclick="trocarCategoria('Projetos')">
+                    <span>📂</span> Projetos
+                </button>
+                <button class="folder-btn" onclick="trocarCategoria('Hábitos')">
+                    <span>✅</span> Hábitos
+                </button>
+            </div>
             <div id="listaNotas"></div>
-
         </div>
-
     </div>
-
 </div>
 
 <footer>
-    <p>&copy; 2026 Meu Bloco de Notas. Todos os direitos reservados.</p>
+    <p>&copy; 2026 Temply. Todos os direitos reservados.</p>
 </footer>
 
 <audio id="somAlarme" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>
