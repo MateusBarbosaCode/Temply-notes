@@ -1,3 +1,4 @@
+/* 1. VARIÁVEIS E TEMAS */
 :root {
     --bg-color: #0d1117;
     --text-color: #f0eded;
@@ -8,6 +9,7 @@
     --button-bg: #21262d;
     --button-border: #30363d;
     --container-bg: rgba(0, 0, 0, 0.4);
+    --notes-box-bg: #161b22; /* Cor da caixa de notas da foto */
 }
 
 body.light-mode {
@@ -20,8 +22,10 @@ body.light-mode {
     --button-bg: #007bff;
     --button-border: #0056b3;
     --container-bg: rgba(255, 255, 255, 0.8);
+    --notes-box-bg: #f0f0f0;
 }
 
+/* 2. GERAL */
 html, body {
     height: 100%;
     width: 100%;
@@ -29,7 +33,6 @@ html, body {
     padding: 0;
     overflow: hidden; 
     background-color: #0d1117; 
-    overscroll-behavior: none; 
 }
 
 body {
@@ -51,61 +54,28 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-.header-main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0 5px 0;
-    width: 100%;
-}
-
-h1 {
-    margin: 0;
-    font-size: clamp(22px, 5vw, 32px);
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--h1-color), #c5a059); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#toggleMode {
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    outline: none !important;
-}
-
-#toggleMode img { width: 30px; height: 30px; }
-
-p { font-size: 14px; opacity: 0.8; text-align: center; margin-bottom: 25px; width: 100%; }
-
+/* 3. CONTAINER PRINCIPAL */
 .container {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 30px;
     width: 95%;
-    max-width: 1100px;
+    max-width: 1200px;
     background: var(--container-bg);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     margin-bottom: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow-y: auto; 
-    -webkit-overflow-scrolling: touch;
 }
 
-/* Estrutura igual à foto */
+/* 4. ESTRUTURA DE COLUNAS (PC) */
 .content-wrapper { 
     display: flex; 
-    gap: 40px; 
+    gap: 30px; 
     width: 100%; 
-    justify-content: space-between;
+    align-items: stretch; /* Garante que as caixas tenham a mesma altura */
 }
 
 .left-column { 
@@ -115,19 +85,28 @@ p { font-size: 14px; opacity: 0.8; text-align: center; margin-bottom: 25px; widt
     gap: 15px; 
 }
 
+/* 5. A CAIXA DE NOTAS SALVAS (IGUAL À FOTO) */
 .right-column { 
-    flex: 0.8; 
+    flex: 1; 
     display: flex; 
     flex-direction: column; 
     gap: 15px;
-    align-items: flex-start; /* Alinhamento limpo */
+    padding: 25px;
+    background: var(--notes-box-bg); /* Fundo sólido da foto */
+    border-radius: 15px;
+    border: 1px solid var(--textarea-border);
 }
 
-.right-column h3 { margin: 0; font-size: 20px; }
+.right-column h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+}
 
+/* 6. INPUTS E TEXTAREA */
 #blocoDeNotas {
     width: 100%;
-    height: 250px;
+    height: 300px;
     padding: 15px;
     border: 2px solid var(--textarea-border);
     border-radius: 12px;
@@ -140,55 +119,87 @@ p { font-size: 14px; opacity: 0.8; text-align: center; margin-bottom: 25px; widt
 }
 
 .agendamento-container {
-    padding: 12px;
-    background: rgba(128, 128, 128, 0.1);
+    padding: 15px;
+    background: rgba(128, 128, 128, 0.05);
     border-radius: 12px;
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
     border: 1px solid var(--textarea-border);
 }
 
-.buttons { display: flex; gap: 10px; }
+.buttons { display: flex; gap: 15px; width: 100%; }
 .buttons button {
     flex: 1;
     padding: 15px;
     cursor: pointer;
     background: var(--button-bg);
     color: white; 
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: bold;
     border: 1px solid var(--button-border);
+    transition: 0.3s;
 }
 
+.buttons button:hover {
+    background: var(--focus-border);
+}
+
+/* 7. ESTILO DAS NOTAS DENTRO DA CAIXA */
 .nota-item {
     background: var(--textarea-bg);
     padding: 15px;
     border-radius: 10px;
     border-left: 5px solid #c5a059;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     width: 100%;
     box-sizing: border-box;
 }
 
-.folder-filters { display: flex; gap: 8px; margin-bottom: 5px; flex-wrap: wrap; }
-.folder-btn {
-    background: transparent; border: none; color: var(--text-color);
-    padding: 6px 10px; cursor: pointer; opacity: 0.7; font-size: 13px;
+.folder-filters { 
+    display: flex; 
+    gap: 10px; 
+    margin-bottom: 10px; 
+    flex-wrap: wrap; 
 }
-.folder-btn.active { opacity: 1; font-weight: bold; background: rgba(255,255,255,0.1); border-radius: 5px; }
 
-footer { padding: 10px; font-size: 12px; opacity: 0.5; }
+.folder-btn {
+    background: rgba(255,255,255,0.05); 
+    border: 1px solid var(--textarea-border); 
+    color: var(--text-color);
+    padding: 8px 14px; 
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+}
 
-/* Media Queries para travar PC e Mobile */
-@media (min-width: 801px) {
+.folder-btn.active { 
+    background: #c5a059; 
+    color: #000; 
+    border-color: #c5a059;
+}
+
+/* 8. RESPONSIVIDADE */
+@media (max-width: 900px) {
+    .content-wrapper { 
+        flex-direction: column; 
+    }
+    
+    body {
+        position: fixed;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .right-column {
+        padding: 20px;
+    }
+}
+
+@media (min-width: 901px) {
     html, body { overflow: auto !important; }
     body { position: relative !important; height: auto !important; }
-    .container { margin: 40px auto; overflow-y: visible !important; height: auto !important; flex: none; }
-}
-
-@media (max-width: 800px) {
-    .content-wrapper { flex-direction: column; }
-    .buttons { flex-direction: column; }
-    .right-column { flex: 1; }
+    .container { margin: 40px auto; flex: none; }
 }
