@@ -1,5 +1,6 @@
- Temply - Minimalist & Elegant Notes
-O Temply é um bloco de notas progressivo (PWA) focado em minimalismo, elegância e performance. Desenvolvido para oferecer uma experiência de escrita fluida e livre de distrações, combinando um design premium com tecnologias modernas de web app.
+ Temply 
+ 
+O Temply é um bloco de notas progressivo (PWA) focado em minimalismo, elegância e performance. Desenvolvido para oferecer uma experiência de escrita fluida e livre de distrações.
 
 Status: 🚀 Em produção / Funcional
 
