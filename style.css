@@ -32,7 +32,7 @@ html, body {
     overflow: hidden; 
     background-color: #0d1117; 
     overscroll-behavior: none; 
-} 
+}
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -44,8 +44,6 @@ body {
     flex-direction: column;
     align-items: center;
     transition: background 0.3s ease, color 0.3s ease;
-    
-    /* Travas para iPhone */
     position: fixed; 
     top: 0;
     left: 0;
@@ -79,22 +77,6 @@ h1 {
     -webkit-text-fill-color: transparent;
 }
 
-/* Estilos do botão de modo escuro conforme seu código original */
-#toggleMode {
-    background: none !important;
-    border: none !important;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: transform 0.3s ease;
-}
-
-#toggleMode img {
-    width: 35px;
-    height: 35px;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-}
-
 p { 
     font-size: 14px; 
     opacity: 0.8; 
@@ -116,7 +98,7 @@ p {
     border-radius: 20px;
     margin-bottom: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    overflow-y: auto; 
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
 
