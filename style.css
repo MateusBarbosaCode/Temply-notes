@@ -22,7 +22,6 @@ body.light-mode {
     --container-bg: rgba(255, 255, 255, 0.8);
 }
 
-/* Geral e Travas Mobile (PWA) */
 html, body {
     height: 100%;
     width: 100%;
@@ -84,7 +83,6 @@ h1 {
 #toggleMode img {
     width: 30px;
     height: 30px;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
 }
 
 p { 
@@ -111,7 +109,6 @@ p {
     -webkit-overflow-scrolling: touch;
 }
 
-/* Estrutura de Colunas PC */
 .content-wrapper { 
     display: flex; 
     gap: 25px; 
@@ -125,23 +122,22 @@ p {
     gap: 15px; 
 }
 
-/* Caixa das Notas Salvas - IGUAL À IMAGEM (limpa, alinhada à direita) */
+/* Coluna de Notas ajustada conforme imagem */
 .right-column { 
     flex: 1; 
     display: flex; 
     flex-direction: column; 
     gap: 15px;
-    padding: 0; /* Remove o padding interno */
-    background: transparent; /* Remove o fundo */
-    border: none; /* Remove a borda */
-    align-items: flex-end; /* Alinha todo o conteúdo à direita */
+    padding: 0;
+    background: transparent;
+    border: none;
+    align-items: flex-end; /* Alinha títulos e filtros à direita */
 }
 
-/* Título Notas Salvas alinhado à direita */
 .right-column h3 {
     width: 100%;
     text-align: right;
-    margin-top: 0;
+    margin: 0;
 }
 
 #blocoDeNotas {
@@ -188,18 +184,17 @@ p {
     border-radius: 10px;
     border-left: 5px solid #c5a059;
     margin-bottom: 10px;
-    width: 100%; /* Ocupa a largura da coluna */
+    width: 100%;
     box-sizing: border-box;
-    text-align: left; /* Conteúdo da nota alinhado à esquerda */
+    text-align: left;
 }
 
-/* Filtros de pastas alinhados à direita */
 .folder-filters { 
     display: flex; 
     gap: 8px; 
     margin-bottom: 10px; 
     flex-wrap: wrap; 
-    justify-content: flex-end; /* Alinha os botões à direita */
+    justify-content: flex-end; 
     width: 100%;
 }
 
@@ -207,21 +202,28 @@ p {
     background: transparent; border: none; color: var(--text-color);
     padding: 6px 10px; cursor: pointer; opacity: 0.7;
 }
-.folder-btn.active { opacity: 1; font-weight: bold; background: rgba(255,255,255,0.1); border-radius: 5px; }
+
+.folder-btn.active { 
+    opacity: 1; 
+    font-weight: bold; 
+    background: rgba(255,255,255,0.1); 
+    border-radius: 5px; 
+}
 
 footer { padding: 10px; font-size: 12px; opacity: 0.5; }
 
-/* PC Media Query */
+/* PC */
 @media (min-width: 801px) {
     html, body { overflow: auto !important; }
     body { position: relative !important; height: auto !important; }
     .container { margin: 40px auto; overflow-y: visible !important; height: auto !important; flex: none; }
 }
 
-/* Mobile Media Query */
+/* Mobile */
 @media (max-width: 800px) {
     .content-wrapper { flex-direction: column; }
-    .right-column { align-items: center; } /* No mobile, centraliza */
+    .right-column { align-items: center; }
+    .right-column h3 { text-align: center; }
     .folder-filters { justify-content: center; }
     .buttons { flex-direction: column; }
 }
