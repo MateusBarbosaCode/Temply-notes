@@ -5,16 +5,32 @@
     --h1-color: #dfe2e5;
     --textarea-bg: #1a1d21;
     --textarea-border: #30363d;
+    --focus-border: #58a6ff;
     --button-bg: #21262d;
     --button-border: #30363d;
     --container-bg: rgba(0, 0, 0, 0.4);
-    --notes-box-bg: #161b22;
 }
 
-/* 2. GERAL */
+body.light-mode {
+    --bg-color: #f8f9fa;
+    --text-color: #212529; 
+    --h1-color: #007bff;
+    --textarea-bg: #ffffff;
+    --textarea-border: #cccccc;
+    --focus-border: #007bff;
+    --button-bg: #007bff;
+    --button-border: #0056b3;
+    --container-bg: rgba(255, 255, 255, 0.8);
+}
+
+/* 2. GERAL E TRAVAS DE TELA (PWA FEEL) */
 html, body {
-    height: 100%; width: 100%; margin: 0; padding: 0;
-    overflow-x: hidden; background-color: #0d1117;
+    min-height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #0d1117;
+    overscroll-behavior: none;
 }
 
 body {
@@ -26,7 +42,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+    position: relative;
 }
 
 @keyframes gradientAnimation {
@@ -35,145 +52,260 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 3. CABEÇALHO (O segredo para o botão ficar pequeno) */
+/* 3. CABEÇALHO */
 .header-main {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px; /* Espaço entre o texto e a lua */
-    margin: 30px 0 10px 0;
+    gap: 15px;
+    margin: 20px 0 5px 0;
     width: 100%;
 }
 
 h1 {
     margin: 0;
-    font-size: clamp(24px, 6vw, 36px);
+    font-size: clamp(22px, 5vw, 32px);
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    color: var(--h1-color);
+    background: linear-gradient(135deg, var(--h1-color), #c5a059); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
+/* Botão de modo escuro - Limpeza total de fundo e borda */
 #toggleMode {
     background: transparent !important;
     border: none !important;
     padding: 0 !important;
+    margin: 0 !important;
     cursor: pointer;
     display: flex;
     align-items: center;
-    width: 35px;  /* Tamanho fixo do botão */
-    height: 35px; /* Tamanho fixo do botão */
-    flex-shrink: 0; /* Impede que ele seja esmagado ou esticado */
+    outline: none !important;
+    box-shadow: none !important;
+    transition: transform 0.3s ease;
 }
 
 #toggleMode img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Garante que a imagem caiba nos 35px */
+    width: 30px; /* Tamanho ajustado para não ser gigante */
+    height: 30px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
 }
 
-/* 4. CONTAINER PRINCIPAL */
+p { 
+    font-size: 14px; 
+    opacity: 0.8; 
+    text-align: center; 
+    margin-bottom: 25px; 
+    width: 100%;
+}
+
+/* 4. CONTAINER */
 .container {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 25px;
-    width: 90%;
-    max-width: 1200px;
+    padding: 20px;
+    width: 95%;
+    max-width: 1100px;
     background: var(--container-bg);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-/* 5. ESTRUTURA DE COLUNAS (PC) */
 .content-wrapper {
     display: flex;
-    gap: 30px;
+    gap: 20px;
     width: 100%;
-    align-items: stretch;
+    flex-wrap: wrap;
+    align-items: flex-start;
 }
 
-.left-column {
-    flex: 1.2;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-/* Caixa de Notas Salvas (Igual à foto no PC) */
+.left-column,
 .right-column {
     flex: 1;
-    background: var(--notes-box-bg);
-    padding: 25px;
-    border-radius: 15px;
-    border: 1px solid var(--textarea-border);
+    min-width: 280px;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-/* 6. COMPONENTES */
+.nota-info-direita {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.nota-info-direita small {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.btn-excluir {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: var(--text-color);
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-excluir:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--focus-border);
+}
+
+/* 5. INPUTS E BOTÕES */
 #blocoDeNotas {
     width: 100%;
-    height: 250px;
+    min-height: 220px;
+    max-height: 45vh;
     padding: 15px;
     border: 2px solid var(--textarea-border);
     border-radius: 12px;
     background: var(--textarea-bg);
     color: var(--text-color);
     font-size: 16px;
-    resize: none;
-    box-sizing: border-box;
+    resize: vertical;
     outline: none;
+    box-sizing: border-box;
 }
 
-.agendamento-container, .categoria-container {
+.agendamento-container {
     padding: 12px;
-    background: rgba(128, 128, 128, 0.05);
-    border-radius: 10px;
-    border: 1px solid var(--textarea-border);
+    background: rgba(128, 128, 128, 0.1);
+    border-radius: 12px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-}
-
-.buttons { display: flex; gap: 10px; margin-top: 10px; }
-.buttons button {
-    flex: 1; padding: 15px; cursor: pointer;
-    background: var(--button-bg); color: white;
-    border-radius: 8px; font-weight: bold;
-    border: 1px solid var(--button-border);
-}
-
-.folder-filters { display: flex; gap: 8px; flex-wrap: wrap; }
-.folder-btn {
-    background: rgba(255,255,255,0.05);
+    gap: 12px;
     border: 1px solid var(--textarea-border);
-    color: var(--text-color);
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
+    flex-wrap: wrap;
 }
 
-.folder-btn.active { background: #c5a059; color: #000; }
+.buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
 
-/* 7. RESPONSIVIDADE (CELULAR) */
-@media (max-width: 800px) {
-    .content-wrapper { flex-direction: column; }
-    
-    .right-column {
-        background: transparent;
-        border: none;
-        padding: 0;
-        margin-top: 20px;
+.buttons button {
+    flex: 1 1 140px;
+    min-width: 120px;
+    padding: 15px;
+    cursor: pointer;
+    background: var(--button-bg);
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 1px solid var(--button-border);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.buttons button:hover {
+    transform: translateY(-1px);
+}
+
+/* 6. NOTAS SALVAS */
+.nota-item {
+    background: var(--textarea-bg);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid #c5a059;
+    margin-bottom: 10px;
+}
+
+.folder-filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.folder-btn {
+    background: transparent; border: none; color: var(--text-color);
+    padding: 6px 10px; cursor: pointer; opacity: 0.7;
+}
+.folder-btn.active { opacity: 1; font-weight: bold; background: rgba(255,255,255,0.1); border-radius: 5px; }
+
+/* 7. FOOTER */
+footer {
+    width: 95%;
+    max-width: 1100px;
+    padding: 10px;
+    font-size: 12px;
+    opacity: 0.5;
+    text-align: center;
+}
+
+/* 8. RESPONSIVO */
+@media (max-width: 1000px) {
+    .content-wrapper {
+        flex-direction: column;
+        gap: 16px;
     }
 
-    .buttons { flex-direction: column; }
-    
-    #toggleMode {
-        width: 30px; /* Um pouco menor no celular */
-        height: 30px;
+    .left-column,
+    .right-column {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+@media (max-width: 720px) {
+    .container {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .header-main {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    p {
+        font-size: 13px;
+        margin-bottom: 18px;
+    }
+
+    .agendamento-container {
+        justify-content: flex-start;
+    }
+
+    .folder-filters {
+        justify-content: center;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 10px 0;
+    }
+
+    .container {
+        width: 100%;
+        margin-bottom: 12px;
+        border-radius: 14px;
+    }
+
+    #blocoDeNotas {
+        min-height: 180px;
+    }
+
+    .folder-btn {
+        padding: 8px 10px;
+        font-size: 0.9rem;
     }
 }
