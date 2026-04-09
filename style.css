@@ -1,4 +1,4 @@
-/* 1. VARIÁVEIS E TEMAS */
+/* 1. VARIÁVEIS E TEMAS  */
 :root {
     --bg-color: #0d1117;
     --text-color: #f0eded;
@@ -23,19 +23,21 @@ body.light-mode {
     --container-bg: rgba(255, 255, 255, 0.8);
 }
 
-/* 2. GERAL E TRAVAS DE TELA (PWA FEEL) */
+/* 2. GERAL E TRAVAS DE TELA  */
 html, body {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
+    /* ESSAS TRÊS LINHAS SÃO AS TRAVAS TÉCNICAS */
     overflow: hidden; 
-    background-color: #01050a; 
+    background-color: #0d1117; 
     overscroll-behavior: none; 
-}
+} 
 
 body {
     font-family: 'Poppins', sans-serif;
+   
     background: linear-gradient(-45deg, #01050a, #0d1117, #1a1d21, #01050a);
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite;
@@ -45,7 +47,7 @@ body {
     align-items: center;
     transition: background 0.3s ease, color 0.3s ease;
     
-    /* Trava para iOS não mostrar fundo branco */
+    /* ADIÇÃO TÉCNICA NECESSÁRIA PARA TRAVAR NO IPHONE */
     position: fixed; 
     top: 0;
     left: 0;
@@ -59,7 +61,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 3. CABEÇALHO E BOTÃO MODO ESCURO  */
+/* 3. CABEÇALHO ( */
 .header-main {
     display: flex;
     align-items: center;
@@ -79,7 +81,8 @@ h1 {
     -webkit-text-fill-color: transparent;
 }
 
-/* botão de tema */
+/* BOTÃO DE MODO ESCURO  */
+#toggleMode {
     background: none !important;
     border: none !important;
     cursor: pointer;
@@ -102,7 +105,7 @@ p {
     width: 100%;
 }
 
-/* 4. CONTAINER */
+/* 4. CONTAINER  */
 .container {
     flex: 1;
     display: flex;
@@ -116,7 +119,7 @@ p {
     margin-bottom: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     
-    /* Única área que rola */
+    
     overflow-y: auto; 
     -webkit-overflow-scrolling: touch;
 }
@@ -179,7 +182,7 @@ p {
 /* 7. FOOTER */
 footer { padding: 10px; font-size: 12px; opacity: 0.5; }
 
-/* 8. RESPONSIVO */
+/* 8. RESPONSIVO  */
 @media (max-width: 800px) {
     .content-wrapper { flex-direction: column; }
     .buttons { flex-direction: column; }
