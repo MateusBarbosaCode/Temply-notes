@@ -23,7 +23,7 @@ body.light-mode {
     --container-bg: rgba(255, 255, 255, 0.8);
 }
 
-/* 2. GERAL E TRAVAS DE TELA (PWA FEEL) */
+/* 2. GERAL E TRAVAS DE TELA */
 html, body {
     height: 100%;
     width: 100%;
@@ -43,13 +43,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: background 0.3s ease, color 0.3s ease;
-    /* Trava absoluta para o celular */
     position: fixed; 
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
 }
 
 @keyframes gradientAnimation {
@@ -78,7 +73,6 @@ h1 {
     -webkit-text-fill-color: transparent;
 }
 
-/* Botão de modo escuro - Limpeza total de fundo e borda */
 #toggleMode {
     background: transparent !important;
     border: none !important;
@@ -93,7 +87,7 @@ h1 {
 }
 
 #toggleMode img {
-    width: 30px; /* Tamanho ajustado para não ser gigante */
+    width: 30px;
     height: 30px;
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
 }
@@ -106,7 +100,7 @@ p {
     width: 100%;
 }
 
-/* 4. CONTAINER */
+/* 4. CONTAINER E ESTRUTURA DE COLUNAS */
 .container {
     flex: 1;
     display: flex;
@@ -123,8 +117,27 @@ p {
     -webkit-overflow-scrolling: touch;
 }
 
-.content-wrapper { display: flex; gap: 20px; width: 100%; }
-.left-column, .right-column { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+.content-wrapper { 
+    display: flex; 
+    gap: 30px; 
+    width: 100%; 
+    align-items: flex-start;
+}
+
+.left-column { 
+    flex: 1.5; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+}
+
+.right-column { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px;
+    min-width: 320px; /* Impede que as notas sumam ou espremam no PC */
+}
 
 /* 5. INPUTS E BOTÕES */
 #blocoDeNotas {
@@ -169,6 +182,7 @@ p {
     border-radius: 10px;
     border-left: 5px solid #c5a059;
     margin-bottom: 10px;
+    word-wrap: break-word;
 }
 
 .folder-filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -181,8 +195,34 @@ p {
 /* 7. FOOTER */
 footer { padding: 10px; font-size: 12px; opacity: 0.5; }
 
-/* 8. RESPONSIVO */
+/* 8. AJUSTES PARA PC (ACIMA DE 801PX) */
+@media (min-width: 801px) {
+    html, body {
+        overflow: auto !important;
+    }
+    body {
+        position: relative !important;
+        height: auto !important;
+        min-height: 100vh;
+    }
+    .container {
+        margin: 40px auto;
+        overflow-y: visible !important;
+        height: auto !important;
+        flex: none;
+    }
+}
+
+/* 9. AJUSTES PARA CELULAR (ABAIXO DE 800PX) */
 @media (max-width: 800px) {
-    .content-wrapper { flex-direction: column; }
-    .buttons { flex-direction: column; }
+    .content-wrapper { 
+        flex-direction: column; 
+    }
+    .right-column {
+        min-width: 100%;
+        width: 100%;
+    }
+    .buttons { 
+        flex-direction: column; 
+    }
 }
