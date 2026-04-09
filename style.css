@@ -29,10 +29,9 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Trava a rolagem da página inteira */
-    background-color: #0d1117; /* Fundo de segurança */
-    overscroll-behavior: none; /* Remove o efeito de mola do navegador */
-}
+    overflow: hidden; 
+    background-color: #0d1117; 
+    overscroll-behavior: none; 
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -44,7 +43,7 @@ body {
     flex-direction: column;
     align-items: center;
     transition: background 0.3s ease, color 0.3s ease;
-    position: fixed; /* Evita o bounce do iOS que revela o fundo branco */
+    position: fixed; 
 }
 
 @keyframes gradientAnimation {
@@ -68,7 +67,7 @@ h1 {
     font-size: clamp(22px, 5vw, 32px);
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--h1-color), #c5a059); /* Dourado suave */
+    background: linear-gradient(135deg, var(--h1-color), #c5a059); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -81,7 +80,7 @@ p {
     width: 100%;
 }
 
-/* 4. CONTAINER (Única área que rola) */
+/* 4. CONTAINER */
 .container {
     flex: 1;
     display: flex;
@@ -94,7 +93,7 @@ p {
     border-radius: 20px;
     margin-bottom: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    overflow-y: auto; /* Permite rolar apenas aqui dentro */
+    overflow-y: auto; /
     -webkit-overflow-scrolling: touch;
 }
 
