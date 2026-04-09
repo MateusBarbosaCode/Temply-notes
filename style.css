@@ -23,15 +23,16 @@ body.light-mode {
     --container-bg: rgba(255, 255, 255, 0.8);
 }
 
-/* 2. GERAL E TRAVAS DE TELA (PWA FEEL) */
+/* 2. GERAL E TRAVAS DE TELA  */
 html, body {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden; 
+    overflow: hidden;
     background-color: #0d1117; 
     overscroll-behavior: none; 
+} 
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -43,7 +44,13 @@ body {
     flex-direction: column;
     align-items: center;
     transition: background 0.3s ease, color 0.3s ease;
+    
+    /* Trava para o iOS não "puxar" o fundo branco */
     position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 @keyframes gradientAnimation {
@@ -93,7 +100,9 @@ p {
     border-radius: 20px;
     margin-bottom: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    overflow-y: auto; /
+    
+    /* container */
+    overflow-y: auto; 
     -webkit-overflow-scrolling: touch;
 }
 
