@@ -8,7 +8,6 @@
     --button-bg: #21262d;
     --button-border: #30363d;
     --container-bg: rgba(0, 0, 0, 0.4);
-    --card-bg: rgba(255, 255, 255, 0.03);
 }
 
 body.light-mode {
@@ -21,9 +20,9 @@ body.light-mode {
     --button-bg: #007bff;
     --button-border: #0056b3;
     --container-bg: rgba(255, 255, 255, 0.8);
-    --card-bg: rgba(0, 0, 0, 0.05);
 }
 
+/* Geral e Travas Mobile (PWA) */
 html, body {
     height: 100%;
     width: 100%;
@@ -112,7 +111,7 @@ p {
     -webkit-overflow-scrolling: touch;
 }
 
-/* Ajuste das Colunas */
+/* Estrutura de Colunas PC */
 .content-wrapper { 
     display: flex; 
     gap: 25px; 
@@ -126,16 +125,23 @@ p {
     gap: 15px; 
 }
 
-/* Caixa das Notas Salvas */
+/* Caixa das Notas Salvas - IGUAL À IMAGEM (limpa, alinhada à direita) */
 .right-column { 
     flex: 1; 
     display: flex; 
     flex-direction: column; 
     gap: 15px;
-    padding: 20px;
-    background: var(--card-bg);
-    border-radius: 15px;
-    border: 1px solid var(--textarea-border);
+    padding: 0; /* Remove o padding interno */
+    background: transparent; /* Remove o fundo */
+    border: none; /* Remove a borda */
+    align-items: flex-end; /* Alinha todo o conteúdo à direita */
+}
+
+/* Título Notas Salvas alinhado à direita */
+.right-column h3 {
+    width: 100%;
+    text-align: right;
+    margin-top: 0;
 }
 
 #blocoDeNotas {
@@ -160,9 +166,11 @@ p {
     justify-content: center;
     gap: 10px;
     border: 1px solid var(--textarea-border);
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.buttons { display: flex; gap: 10px; }
+.buttons { display: flex; gap: 10px; width: 100%; }
 .buttons button {
     flex: 1;
     padding: 15px;
@@ -180,9 +188,21 @@ p {
     border-radius: 10px;
     border-left: 5px solid #c5a059;
     margin-bottom: 10px;
+    width: 100%; /* Ocupa a largura da coluna */
+    box-sizing: border-box;
+    text-align: left; /* Conteúdo da nota alinhado à esquerda */
 }
 
-.folder-filters { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+/* Filtros de pastas alinhados à direita */
+.folder-filters { 
+    display: flex; 
+    gap: 8px; 
+    margin-bottom: 10px; 
+    flex-wrap: wrap; 
+    justify-content: flex-end; /* Alinha os botões à direita */
+    width: 100%;
+}
+
 .folder-btn {
     background: transparent; border: none; color: var(--text-color);
     padding: 6px 10px; cursor: pointer; opacity: 0.7;
@@ -191,15 +211,17 @@ p {
 
 footer { padding: 10px; font-size: 12px; opacity: 0.5; }
 
-/* PC e Mobile */
+/* PC Media Query */
 @media (min-width: 801px) {
     html, body { overflow: auto !important; }
     body { position: relative !important; height: auto !important; }
     .container { margin: 40px auto; overflow-y: visible !important; height: auto !important; flex: none; }
 }
 
+/* Mobile Media Query */
 @media (max-width: 800px) {
     .content-wrapper { flex-direction: column; }
-    .right-column { padding: 15px; background: transparent; border: none; }
+    .right-column { align-items: center; } /* No mobile, centraliza */
+    .folder-filters { justify-content: center; }
     .buttons { flex-direction: column; }
 }
