@@ -11,18 +11,6 @@
     --notes-box-bg: #161b22;
 }
 
-body.light-mode {
-    --bg-color: #f8f9fa;
-    --text-color: #212529; 
-    --h1-color: #007bff;
-    --textarea-bg: #ffffff;
-    --textarea-border: #cccccc;
-    --button-bg: #007bff;
-    --button-border: #0056b3;
-    --container-bg: rgba(255, 255, 255, 0.8);
-    --notes-box-bg: #f0f0f0;
-}
-
 /* 2. GERAL */
 html, body {
     height: 100%; width: 100%; margin: 0; padding: 0;
@@ -47,15 +35,22 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 3. CABEÇALHO - CORREÇÃO DO ÍCONE GIGANTE */
+/* 3. CABEÇALHO (O segredo para o botão ficar pequeno) */
 .header-main {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    margin: 20px 0 5px 0;
+    gap: 12px; /* Espaço entre o texto e a lua */
+    margin: 30px 0 10px 0;
     width: 100%;
-    max-width: 100vw;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(24px, 6vw, 36px);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--h1-color);
 }
 
 #toggleMode {
@@ -65,16 +60,15 @@ body {
     cursor: pointer;
     display: flex;
     align-items: center;
-    width: 40px; /* Trava a largura do botão */
-    height: 40px; /* Trava a altura do botão */
-    flex-shrink: 0;
+    width: 35px;  /* Tamanho fixo do botão */
+    height: 35px; /* Tamanho fixo do botão */
+    flex-shrink: 0; /* Impede que ele seja esmagado ou esticado */
 }
 
 #toggleMode img {
-    width: 100%; /* Ocupa apenas os 40px do botão pai */
-    height: auto;
-    max-width: 40px; /* Garante que não exploda no celular */
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Garante que a imagem caiba nos 35px */
 }
 
 /* 4. CONTAINER PRINCIPAL */
@@ -87,7 +81,7 @@ body {
     background: var(--container-bg);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    margin: 20px 0;
+    margin-bottom: 30px;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -100,12 +94,13 @@ body {
 }
 
 .left-column {
-    flex: 1;
+    flex: 1.2;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
+/* Caixa de Notas Salvas (Igual à foto no PC) */
 .right-column {
     flex: 1;
     background: var(--notes-box-bg);
@@ -141,10 +136,9 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
 }
 
-.buttons { display: flex; gap: 10px; }
+.buttons { display: flex; gap: 10px; margin-top: 10px; }
 .buttons button {
     flex: 1; padding: 15px; cursor: pointer;
     background: var(--button-bg); color: white;
@@ -173,16 +167,13 @@ body {
         background: transparent;
         border: none;
         padding: 0;
-    }
-
-    #toggleMode {
-        width: 35px;
-        height: 35px;
-    }
-
-    #toggleMode img {
-        max-width: 35px;
+        margin-top: 20px;
     }
 
     .buttons { flex-direction: column; }
+    
+    #toggleMode {
+        width: 30px; /* Um pouco menor no celular */
+        height: 30px;
+    }
 }
