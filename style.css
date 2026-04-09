@@ -22,7 +22,7 @@ body.light-mode {
     --container-bg: rgba(255, 255, 255, 0.8);
 }
 
-/* Travas de tela e reset */
+/* Configuração base (Focada no Mobile Perfeito) */
 html, body {
     height: 100%;
     width: 100%;
@@ -42,7 +42,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: background 0.3s ease, color 0.3s ease;
     position: fixed; 
     top: 0; left: 0; right: 0; bottom: 0;
 }
@@ -53,6 +52,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+/* Cabeçalho e Botão Lua */
 .header-main {
     display: flex;
     align-items: center;
@@ -96,6 +96,7 @@ p {
     width: 100%;
 }
 
+/* Estrutura de Conteúdo */
 .container {
     flex: 1;
     display: flex;
@@ -167,14 +168,33 @@ p {
 
 footer { padding: 10px; font-size: 12px; opacity: 0.5; }
 
-/* Ajustes Responsivos */
+/* AJUSTES ESPECÍFICOS PARA PC (Telas acima de 801px) */
+@media (min-width: 801px) {
+    html, body {
+        overflow: auto !important; /* Libera a rolagem no PC */
+    }
+    body {
+        position: relative !important; /* Remove o travamento fixed no PC */
+        height: auto !important;
+        min-height: 100vh;
+        display: block !important; /* Melhora o alinhamento no PC */
+    }
+    .container {
+        margin: 40px auto; /* Centraliza o bloco no PC */
+        overflow-y: visible !important;
+        height: auto !important;
+        flex: none;
+    }
+    .header-main, p {
+        width: 100%;
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* AJUSTES PARA CELULAR */
 @media (max-width: 800px) {
     .content-wrapper { flex-direction: column; }
     .buttons { flex-direction: column; }
-}
-
-@media (min-width: 801px) {
-    html, body { overflow: auto; }
-    body { position: static; height: auto; }
-    .container { overflow-y: visible; height: auto; flex: none; }
 }
