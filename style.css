@@ -32,7 +32,7 @@ html, body {
     overflow: hidden; 
     background-color: #0d1117; 
     overscroll-behavior: none; 
-} /* Chave fechada corretamente aqui */
+}
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -78,19 +78,23 @@ h1 {
     -webkit-text-fill-color: transparent;
 }
 
-/* Botão de modo escuro mantido conforme seu original */
+/* Botão de modo escuro - Limpeza total de fundo e borda */
 #toggleMode {
-    background: none !important;
+    background: transparent !important;
     border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
     cursor: pointer;
     display: flex;
     align-items: center;
+    outline: none !important;
+    box-shadow: none !important;
     transition: transform 0.3s ease;
 }
 
 #toggleMode img {
-    width: 35px;
-    height: 35px;
+    width: 30px; /* Tamanho ajustado para não ser gigante */
+    height: 30px;
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
 }
 
@@ -115,13 +119,11 @@ p {
     border-radius: 20px;
     margin-bottom: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    /* Somente o conteúdo interno rola */
     overflow-y: auto; 
     -webkit-overflow-scrolling: touch;
 }
 
 .content-wrapper { display: flex; gap: 20px; width: 100%; }
-
 .left-column, .right-column { flex: 1; display: flex; flex-direction: column; gap: 15px; }
 
 /* 5. INPUTS E BOTÕES */
