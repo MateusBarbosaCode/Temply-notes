@@ -4,33 +4,20 @@
     --h1-color: #dfe2e5;
     --textarea-bg: #1a1d21;
     --textarea-border: #30363d;
-    --focus-border: #58a6ff;
     --button-bg: #21262d;
     --button-border: #30363d;
     --container-bg: rgba(0, 0, 0, 0.4);
 }
 
-body.light-mode {
-    --bg-color: #f8f9fa;
-    --text-color: #212529; 
-    --h1-color: #007bff;
-    --textarea-bg: #ffffff;
-    --textarea-border: #cccccc;
-    --focus-border: #007bff;
-    --button-bg: #007bff;
-    --button-border: #0056b3;
-    --container-bg: rgba(255, 255, 255, 0.8);
-}
-
-/* Configuração base (Focada no Mobile Perfeito) */
+/* Reset e Travas Mobile */
 html, body {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden; 
-    background-color: #0d1117; 
-    overscroll-behavior: none; 
+    overflow: hidden;
+    background-color: #0d1117;
+    overscroll-behavior: none;
 }
 
 body {
@@ -42,7 +29,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed; 
+    position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
 }
 
@@ -52,51 +39,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Cabeçalho e Botão Lua */
-.header-main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0 5px 0;
-    width: 100%;
-}
-
-h1 {
-    margin: 0;
-    font-size: clamp(22px, 5vw, 32px);
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--h1-color), #c5a059); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#toggleMode {
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    outline: none !important;
-}
-
-#toggleMode img {
-    width: 30px;
-    height: 30px;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-}
-
-p { 
-    font-size: 14px; 
-    opacity: 0.8; 
-    text-align: center; 
-    margin-bottom: 25px; 
-    width: 100%;
-}
-
-/* Estrutura de Conteúdo */
+/* Estrutura Principal */
 .container {
     flex: 1;
     display: flex;
@@ -107,36 +50,77 @@ p {
     background: var(--container-bg);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    overflow-y: auto; 
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
 
-.content-wrapper { display: flex; gap: 20px; width: 100%; }
-.left-column, .right-column { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+/* Grid de Conteúdo - Ajustado */
+.content-wrapper {
+    display: flex;
+    flex-direction: row; /* Lado a lado por padrão */
+    gap: 25px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.left-column {
+    flex: 1.5; /* Área de digitação maior */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 0;
+}
+
+.right-column {
+    flex: 1; /* Área de notas */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 0;
+}
+
+/* Elementos de UI */
+.header-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, var(--h1-color), #c5a059);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
 
 #blocoDeNotas {
     width: 100%;
-    height: 200px;
+    height: 250px;
     padding: 15px;
     border: 2px solid var(--textarea-border);
     border-radius: 12px;
     background: var(--textarea-bg);
-    color: var(--text-color); 
+    color: var(--text-color);
     font-size: 16px;
     resize: none;
-    outline: none;
+    box-sizing: border-box;
 }
 
 .agendamento-container {
     padding: 12px;
     background: rgba(128, 128, 128, 0.1);
     border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
     border: 1px solid var(--textarea-border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .buttons { display: flex; gap: 10px; }
@@ -145,56 +129,69 @@ p {
     padding: 15px;
     cursor: pointer;
     background: var(--button-bg);
-    color: white; 
+    color: white;
     border-radius: 8px;
     font-weight: bold;
     border: 1px solid var(--button-border);
 }
 
+/* Notas Salvas Estilização */
 .nota-item {
     background: var(--textarea-bg);
     padding: 15px;
     border-radius: 10px;
     border-left: 5px solid #c5a059;
     margin-bottom: 10px;
+    word-wrap: break-word;
 }
 
-.folder-filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.folder-filters { 
+    display: flex; 
+    gap: 8px; 
+    flex-wrap: wrap; 
+}
+
 .folder-btn {
-    background: transparent; border: none; color: var(--text-color);
-    padding: 6px 10px; cursor: pointer; opacity: 0.7;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--textarea-border);
+    color: var(--text-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
 }
-.folder-btn.active { opacity: 1; font-weight: bold; background: rgba(255,255,255,0.1); border-radius: 5px; }
 
-footer { padding: 10px; font-size: 12px; opacity: 0.5; }
+.folder-btn.active {
+    background: #c5a059;
+    color: #000;
+    font-weight: bold;
+}
 
-/* AJUSTES ESPECÍFICOS PARA PC (Telas acima de 801px) */
+/* --- RESPONSIVIDADE --- */
+
+/* Celular (Abaixo de 800px) */
+@media (max-width: 800px) {
+    .content-wrapper {
+        flex-direction: column; /* Notas vão para baixo */
+    }
+    
+    .left-column, .right-column {
+        width: 100%;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+}
+
+/* PC (Acima de 801px) */
 @media (min-width: 801px) {
-    html, body {
-        overflow: auto !important; /* Libera a rolagem no PC */
-    }
-    body {
-        position: relative !important; /* Remove o travamento fixed no PC */
-        height: auto !important;
-        min-height: 100vh;
-        display: block !important; /* Melhora o alinhamento no PC */
-    }
-    .container {
-        margin: 40px auto; /* Centraliza o bloco no PC */
-        overflow-y: visible !important;
+    html, body { overflow: auto !important; }
+    body { position: relative !important; height: auto !important; }
+    .container { 
+        margin: 40px auto; 
+        overflow-y: visible !important; 
         height: auto !important;
         flex: none;
     }
-    .header-main, p {
-        width: 100%;
-        max-width: 1100px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-/* AJUSTES PARA CELULAR */
-@media (max-width: 800px) {
-    .content-wrapper { flex-direction: column; }
-    .buttons { flex-direction: column; }
 }
