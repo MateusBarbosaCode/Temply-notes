@@ -1,4 +1,3 @@
-/* 1. VARIÁVEIS E TEMAS */
 :root {
     --bg-color: #0d1117;
     --text-color: #f0eded;
@@ -9,6 +8,7 @@
     --button-bg: #21262d;
     --button-border: #30363d;
     --container-bg: rgba(0, 0, 0, 0.4);
+    --card-bg: rgba(255, 255, 255, 0.03);
 }
 
 body.light-mode {
@@ -21,9 +21,9 @@ body.light-mode {
     --button-bg: #007bff;
     --button-border: #0056b3;
     --container-bg: rgba(255, 255, 255, 0.8);
+    --card-bg: rgba(0, 0, 0, 0.05);
 }
 
-/* 2. GERAL E TRAVAS DE TELA */
 html, body {
     height: 100%;
     width: 100%;
@@ -53,7 +53,6 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 3. CABEÇALHO */
 .header-main {
     display: flex;
     align-items: center;
@@ -77,13 +76,10 @@ h1 {
     background: transparent !important;
     border: none !important;
     padding: 0 !important;
-    margin: 0 !important;
     cursor: pointer;
     display: flex;
     align-items: center;
     outline: none !important;
-    box-shadow: none !important;
-    transition: transform 0.3s ease;
 }
 
 #toggleMode img {
@@ -100,7 +96,6 @@ p {
     width: 100%;
 }
 
-/* 4. CONTAINER E ESTRUTURA DE COLUNAS */
 .container {
     flex: 1;
     display: flex;
@@ -117,32 +112,35 @@ p {
     -webkit-overflow-scrolling: touch;
 }
 
+/* Ajuste das Colunas */
 .content-wrapper { 
     display: flex; 
-    gap: 30px; 
+    gap: 25px; 
     width: 100%; 
-    align-items: flex-start;
 }
 
 .left-column { 
-    flex: 1.5; 
+    flex: 1.4; 
     display: flex; 
     flex-direction: column; 
     gap: 15px; 
 }
 
+/* Caixa das Notas Salvas */
 .right-column { 
     flex: 1; 
     display: flex; 
     flex-direction: column; 
     gap: 15px;
-    min-width: 320px; /* Impede que as notas sumam ou espremam no PC */
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 15px;
+    border: 1px solid var(--textarea-border);
 }
 
-/* 5. INPUTS E BOTÕES */
 #blocoDeNotas {
     width: 100%;
-    height: 200px;
+    height: 250px;
     padding: 15px;
     border: 2px solid var(--textarea-border);
     border-radius: 12px;
@@ -151,6 +149,7 @@ p {
     font-size: 16px;
     resize: none;
     outline: none;
+    box-sizing: border-box;
 }
 
 .agendamento-container {
@@ -175,54 +174,32 @@ p {
     border: 1px solid var(--button-border);
 }
 
-/* 6. NOTAS SALVAS */
 .nota-item {
     background: var(--textarea-bg);
     padding: 15px;
     border-radius: 10px;
     border-left: 5px solid #c5a059;
     margin-bottom: 10px;
-    word-wrap: break-word;
 }
 
-.folder-filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.folder-filters { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
 .folder-btn {
     background: transparent; border: none; color: var(--text-color);
     padding: 6px 10px; cursor: pointer; opacity: 0.7;
 }
 .folder-btn.active { opacity: 1; font-weight: bold; background: rgba(255,255,255,0.1); border-radius: 5px; }
 
-/* 7. FOOTER */
 footer { padding: 10px; font-size: 12px; opacity: 0.5; }
 
-/* 8. AJUSTES PARA PC (ACIMA DE 801PX) */
+/* PC e Mobile */
 @media (min-width: 801px) {
-    html, body {
-        overflow: auto !important;
-    }
-    body {
-        position: relative !important;
-        height: auto !important;
-        min-height: 100vh;
-    }
-    .container {
-        margin: 40px auto;
-        overflow-y: visible !important;
-        height: auto !important;
-        flex: none;
-    }
+    html, body { overflow: auto !important; }
+    body { position: relative !important; height: auto !important; }
+    .container { margin: 40px auto; overflow-y: visible !important; height: auto !important; flex: none; }
 }
 
-/* 9. AJUSTES PARA CELULAR (ABAIXO DE 800PX) */
 @media (max-width: 800px) {
-    .content-wrapper { 
-        flex-direction: column; 
-    }
-    .right-column {
-        min-width: 100%;
-        width: 100%;
-    }
-    .buttons { 
-        flex-direction: column; 
-    }
+    .content-wrapper { flex-direction: column; }
+    .right-column { padding: 15px; background: transparent; border: none; }
+    .buttons { flex-direction: column; }
 }
