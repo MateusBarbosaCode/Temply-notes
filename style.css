@@ -5,11 +5,10 @@
     --h1-color: #dfe2e5;
     --textarea-bg: #1a1d21;
     --textarea-border: #30363d;
-    --focus-border: #58a6ff;
     --button-bg: #21262d;
     --button-border: #30363d;
     --container-bg: rgba(0, 0, 0, 0.4);
-    --notes-box-bg: #161b22; /* Cor da caixa de notas da foto */
+    --notes-box-bg: #161b22;
 }
 
 body.light-mode {
@@ -18,21 +17,16 @@ body.light-mode {
     --h1-color: #007bff;
     --textarea-bg: #ffffff;
     --textarea-border: #cccccc;
-    --focus-border: #007bff;
     --button-bg: #007bff;
     --button-border: #0056b3;
     --container-bg: rgba(255, 255, 255, 0.8);
     --notes-box-bg: #f0f0f0;
 }
 
-/* 2. GERAL */
+/* 2. GERAL E TRAVAS */
 html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; 
-    background-color: #0d1117; 
+    height: 100%; width: 100%; margin: 0; padding: 0;
+    overflow: hidden; background-color: #0d1117;
 }
 
 body {
@@ -44,7 +38,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed; 
+    position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
 }
 
@@ -54,56 +48,89 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 3. CONTAINER PRINCIPAL */
+/* 3. CABEÇALHO E BOTÃO MODO ESCURO (CORREÇÃO DO TAMANHO) */
+.header-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0 5px 0;
+    width: 100%;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(22px, 5vw, 32px);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--h1-color), #c5a059); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#toggleMode {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;  /* Tamanho fixo para não crescer no mobile */
+    height: 40px; /* Tamanho fixo */
+    flex-shrink: 0; /* Impede que o flexbox estique o botão */
+}
+
+#toggleMode img {
+    width: 28px;  /* Ícone interno fixo */
+    height: 28px;
+    object-fit: contain;
+}
+
+/* 4. CONTAINER */
 .container {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 30px;
+    padding: 25px;
     width: 95%;
     max-width: 1200px;
     background: var(--container-bg);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
-/* 4. ESTRUTURA DE COLUNAS (PC) */
-.content-wrapper { 
-    display: flex; 
-    gap: 30px; 
-    width: 100%; 
-    align-items: stretch; /* Garante que as caixas tenham a mesma altura */
+/* 5. ESTRUTURA DE COLUNAS (IGUAL À FOTO NO PC) */
+.content-wrapper {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    align-items: flex-start;
 }
 
-.left-column { 
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 15px; 
-}
-
-/* 5. A CAIXA DE NOTAS SALVAS (IGUAL À FOTO) */
-.right-column { 
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
+.left-column {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
     gap: 15px;
+}
+
+.right-column {
+    flex: 1;
+    background: var(--notes-box-bg);
     padding: 25px;
-    background: var(--notes-box-bg); /* Fundo sólido da foto */
     border-radius: 15px;
     border: 1px solid var(--textarea-border);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-height: 400px;
 }
 
-.right-column h3 {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 600;
-}
-
-/* 6. INPUTS E TEXTAREA */
+/* 6. ELEMENTOS INTERNOS */
 #blocoDeNotas {
     width: 100%;
     height: 300px;
@@ -111,95 +138,64 @@ body {
     border: 2px solid var(--textarea-border);
     border-radius: 12px;
     background: var(--textarea-bg);
-    color: var(--text-color); 
+    color: var(--text-color);
     font-size: 16px;
     resize: none;
-    outline: none;
     box-sizing: border-box;
+    outline: none;
 }
 
 .agendamento-container {
     padding: 15px;
     background: rgba(128, 128, 128, 0.05);
     border-radius: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     border: 1px solid var(--textarea-border);
+    display: flex;
+    justify-content: center;
 }
 
-.buttons { display: flex; gap: 15px; width: 100%; }
+.buttons { display: flex; gap: 10px; }
 .buttons button {
-    flex: 1;
-    padding: 15px;
-    cursor: pointer;
-    background: var(--button-bg);
-    color: white; 
-    border-radius: 10px;
-    font-weight: bold;
+    flex: 1; padding: 15px; cursor: pointer;
+    background: var(--button-bg); color: white;
+    border-radius: 8px; font-weight: bold;
     border: 1px solid var(--button-border);
-    transition: 0.3s;
 }
 
-.buttons button:hover {
-    background: var(--focus-border);
-}
-
-/* 7. ESTILO DAS NOTAS DENTRO DA CAIXA */
 .nota-item {
     background: var(--textarea-bg);
     padding: 15px;
     border-radius: 10px;
     border-left: 5px solid #c5a059;
-    margin-bottom: 12px;
-    width: 100%;
-    box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
-.folder-filters { 
-    display: flex; 
-    gap: 10px; 
-    margin-bottom: 10px; 
-    flex-wrap: wrap; 
-}
-
+.folder-filters { display: flex; gap: 8px; flex-wrap: wrap; }
 .folder-btn {
-    background: rgba(255,255,255,0.05); 
-    border: 1px solid var(--textarea-border); 
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--textarea-border);
     color: var(--text-color);
-    padding: 8px 14px; 
+    padding: 6px 12px;
+    border-radius: 6px;
     cursor: pointer;
-    border-radius: 8px;
-    font-size: 14px;
 }
 
-.folder-btn.active { 
-    background: #c5a059; 
-    color: #000; 
-    border-color: #c5a059;
-}
+.folder-btn.active { background: #c5a059; color: #000; }
 
-/* 8. RESPONSIVIDADE */
-@media (max-width: 900px) {
-    .content-wrapper { 
-        flex-direction: column; 
-    }
-    
-    body {
-        position: fixed;
-    }
-
-    .container {
-        padding: 15px;
-    }
-
-    .right-column {
-        padding: 20px;
-    }
-}
-
-@media (min-width: 901px) {
+/* 7. RESPONSIVIDADE */
+@media (min-width: 801px) {
     html, body { overflow: auto !important; }
     body { position: relative !important; height: auto !important; }
-    .container { margin: 40px auto; flex: none; }
+    .container { margin: 40px auto; overflow-y: visible !important; flex: none; }
+}
+
+@media (max-width: 800px) {
+    .content-wrapper { flex-direction: column; }
+    .right-column {
+        background: transparent;
+        border: none;
+        padding: 0;
+    }
+    .buttons { flex-direction: column; }
+    #toggleMode { width: 35px; height: 35px; } /* Ajuste fino para celular */
 }
