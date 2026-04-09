@@ -1,6 +1,5 @@
 /* 1. VARIÁVEIS E TEMAS */
 :root {
-    /* Modo Escuro */
     --bg-color: #0d1117;
     --text-color: #f0eded;
     --h1-color: #dfe2e5;
@@ -13,7 +12,6 @@
 }
 
 body.light-mode {
-    /* Modo Claro */
     --bg-color: #f8f9fa;
     --text-color: #212529; 
     --h1-color: #007bff;
@@ -25,7 +23,17 @@ body.light-mode {
     --container-bg: rgba(255, 255, 255, 0.8);
 }
 
-/* 2. GERAL E FUNDO */
+/* 2. GERAL E TRAVAS DE TELA (PWA FEEL) */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Trava a rolagem da página inteira */
+    background-color: #0d1117; /* Fundo de segurança */
+    overscroll-behavior: none; /* Remove o efeito de mola do navegador */
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(-45deg, #01050a, #0d1117, #1a1d21, #01050a);
@@ -34,15 +42,9 @@ body {
     color: var(--text-color);
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
     align-items: center;
     transition: background 0.3s ease, color 0.3s ease;
-}
-
-body.light-mode {
-    background: var(--bg-color); 
-    animation: none;
+    position: fixed; /* Evita o bounce do iOS que revela o fundo branco */
 }
 
 @keyframes gradientAnimation {
@@ -51,7 +53,7 @@ body.light-mode {
     100% { background-position: 0% 50%; }
 }
 
-/* 3. CABEÇALHO E SUBTÍTULO */
+/* 3. CABEÇALHO */
 .header-main {
     display: flex;
     align-items: center;
@@ -66,7 +68,7 @@ h1 {
     font-size: clamp(22px, 5vw, 32px);
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--h1-color), #007bff);       
+    background: linear-gradient(135deg, var(--h1-color), #c5a059); /* Dourado suave */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -77,25 +79,9 @@ p {
     text-align: center; 
     margin-bottom: 25px; 
     width: 100%;
-    display: block;
 }
 
-#toggleMode {
-    background: none !important;
-    border: none !important;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: transform 0.3s ease;
-}
-
-#toggleMode img {
-    width: 35px;
-    height: 35px;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
-}
-
-/*  4. CONTAINER E LAYOUT */
+/* 4. CONTAINER (Única área que rola) */
 .container {
     flex: 1;
     display: flex;
@@ -108,23 +94,15 @@ p {
     border-radius: 20px;
     margin-bottom: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background 0.3s ease;
+    overflow-y: auto; /* Permite rolar apenas aqui dentro */
+    -webkit-overflow-scrolling: touch;
 }
 
-.content-wrapper {
-    display: flex;
-    gap: 20px;
-    width: 100%;
-}
+.content-wrapper { display: flex; gap: 20px; width: 100%; }
 
-.left-column, .right-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
+.left-column, .right-column { flex: 1; display: flex; flex-direction: column; gap: 15px; }
 
-/* 5. INPUTS */
+/* 5. INPUTS E BOTÕES */
 #blocoDeNotas {
     width: 100%;
     height: 200px;
@@ -135,13 +113,7 @@ p {
     color: var(--text-color); 
     font-size: 16px;
     resize: none;
-    box-sizing: border-box;
     outline: none;
-    transition: border-color 0.3s;
-}
-
-#blocoDeNotas:focus {
-    border-color: var(--focus-border);
 }
 
 .agendamento-container {
@@ -150,112 +122,40 @@ p {
     border-radius: 12px;
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 10px;
     border: 1px solid var(--textarea-border);
 }
 
-select {
-    padding: 8px;
-    border-radius: 8px;
-    border: 1px solid var(--textarea-border);
-    background: var(--textarea-bg);
-    color: var(--text-color);
-    outline: none;
-}
-
-/* 6. BOTÕES */
 .buttons { display: flex; gap: 10px; }
-
 .buttons button {
     flex: 1;
     padding: 15px;
     cursor: pointer;
     background: var(--button-bg);
-    color: rgb(247, 244, 244); 
+    color: white; 
     border-radius: 8px;
     font-weight: bold;
     border: 1px solid var(--button-border);
-    transition: all 0.2s ease;
 }
 
-.buttons button:hover {
-    filter: brightness(1.2);
-    transform: translateY(-2px);
-}
-
-/* 7. NOTAS SALVAs */
-.right-column {
-    background: rgba(128, 128, 128, 0.05);
-    padding: 15px;
-    border-radius: 15px;
-}
-
+/* 6. NOTAS SALVAS */
 .nota-item {
     background: var(--textarea-bg);
     padding: 15px;
     border-radius: 10px;
-    border-left: 5px solid #007bff;
-    border-bottom: 1px solid var(--textarea-border);
-    color: var(--text-color);
+    border-left: 5px solid #c5a059;
+    margin-bottom: 10px;
 }
 
-.nota-item p { text-align: left; margin: 0 0 10px 0; opacity: 1; }
-
-.btn-excluir {
-    background: #dc3545;
-    color: rgb(246, 243, 243);
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-/* PASTAS  */
-.folder-filters {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
+.folder-filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
 .folder-btn {
-    background: transparent; 
-    border: none;             
-    color: var(--text-color); 
-    padding: 6px 10px;
-    border-radius: 6px;       
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: background 0.2s ease;
-    opacity: 0.8;
+    background: transparent; border: none; color: var(--text-color);
+    padding: 6px 10px; cursor: pointer; opacity: 0.7;
 }
+.folder-btn.active { opacity: 1; font-weight: bold; background: rgba(255,255,255,0.1); border-radius: 5px; }
 
-/* effeito de cinza clarinho ao passar o mouse */
-.folder-btn:hover {
-    background: rgba(128, 128, 128, 0.1);
-    opacity: 1;
-}
-
-/* Quando a pasta está selecionada */
-.folder-btn.active {
-    background: rgba(128, 128, 128, 0.1);
-    opacity: 1;
-    font-weight: 600;
-}
-
-/* Ajuste do Subtítulo (Centralização) */
-.container > p {
-    text-align: center;
-    width: 100%;
-    margin-bottom: 25px;
-    display: block;
-}
+/* 7. FOOTER */
+footer { padding: 10px; font-size: 12px; opacity: 0.5; }
 
 /* 8. RESPONSIVO */
 @media (max-width: 800px) {
